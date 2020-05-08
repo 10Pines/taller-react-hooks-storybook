@@ -1,27 +1,30 @@
+import "../App.scss"
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
-import Button from "./Button";
+import HooplaButton from "./HooplaButton";
 
 export default {
-  component: Button,
+  component: HooplaButton,
   title: "Nuestro Boton",
   // Our exports that end in "Data" are not stories.
   excludeStories: /.*Data$/,
 };
 
 export const Default = () => (
-  <Button onClick={action("Button Clicked")}>Apretame!</Button>
+  <HooplaButton onClick={action("HooplaButton Clicked")}>
+    Apretame!
+  </HooplaButton>
 );
 
 export const Primary = () => (
-  <Button onClick={action("Button Clicked")} primary={true}>
+  <HooplaButton onClick={action("HooplaButton Clicked")} primary={true}>
     Apretame!
-  </Button>
+  </HooplaButton>
 );
 
 export const Secondary = () => (
-  <Button onClick={action("Button Clicked")} secondary={true}>
+  <HooplaButton onClick={action("HooplaButton Clicked")} secondary={true}>
     Apretame!
-  </Button>
+  </HooplaButton>
 );
