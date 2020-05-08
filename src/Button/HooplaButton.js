@@ -1,6 +1,12 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-export default ({ onClick, children, ...rest }) => (
-  <Button onClick={onClick} {...rest}>{children}</Button>
-);
+export default ({ onClick, primary, secondary, children, ...rest }) => {
+  const variant = primary ? "primary" : secondary ? "secondary" : "dark";
+  debugger
+  return (
+    <Button onClick={onClick} variant={variant} {...rest}>
+      {children}
+    </Button>
+  );
+};
