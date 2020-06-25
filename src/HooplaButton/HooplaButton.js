@@ -1,7 +1,11 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import styles from "./HooplaButton.module.css";
 
 export const HooplaButton = ({ children, onClick }) => {
-  console.log("RENDER BUTTON");
-  return <Button onClick={onClick}>{children}</Button>;
+  return (
+    <Button className={styles.linkText} onClick={onClick}>
+      {children}
+    </Button>
+  );
 };

@@ -6,87 +6,84 @@ class CounterKeeper {
     this.counter = initial;
   }
 
-  valor() {
+  value() {
     return this.counter;
   }
 
-  sumar() {
+  increase() {
     return new CounterKeeper(this.counter + 1);
   }
 
-  resetear() {
+  reset() {
     return new CounterKeeper(0);
   }
 }
 
-const CounterHook = ({ peligro }) => {
+const CounterHook = ({ danger }) => {
   const [counter, setCounter] = useState(new CounterKeeper(0));
-  const sumarContador = () => {
-    setCounter(counter.sumar());
+  const increaseCounter = () => {
+    setCounter(counter.increase());
   };
-  const resetearContador = () => {
-    setCounter(counter.resetear());
+  const resetCounter = () => {
+    setCounter(counter.reset());
   };
   return (
     <CounterView
-      peligro={peligro}
+      danger={danger}
       counter={counter}
-      sumar={sumarContador}
-      resetear={resetearContador}
+      onIncrease={increaseCounter}
+      onReset={resetCounter}
     />
   );
 };
 
 class CounterClass extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      counter: new CounterKeeper(0),
-    };
-  }
+  state = {
+    counter: new CounterKeeper(0),
+  };
 
   componentDidMount() {
-    console.log("El componente monto!");
+    console.log("The component mounted!");
   }
 
   componentDidUpdate() {
-    console.log("El componente se actualizo!");
+    console.log("The component updated!");
   }
 
-  sumarContador = () => {
-    this.setState({ counter: this.state.counter.sumar() });
+  increaseCounter = () => {
+    this.setState({ counter: this.state.counter.increase() });
   };
 
-  resetearContador = () => {
-    this.setState({ counter: this.state.counter.resetear() });
+  resetCounter = () => {
+    this.setState({ counter: this.state.counter.reset() });
   };
 
   render() {
     return (
       <CounterView
-        peligro={this.props.peligro}
+        danger={this.props.danger}
         counter={this.state.counter}
-        sumar={this.sumarContador}
-        resetear={this.resetearContador}
+        onIncrease={this.increaseCounter}
+        onReset={this.resetCounter}
       />
     );
   }
 }
 
-const CounterView = ({ counter, sumar, resetear, peligro }) => {
-  const numeroRojo = counter.valor() >= 5;
-  const borde = peligro ? "border-danger" : "border-success";
+const CounterView = ({ counter, onIncrease, onReset, danger }) => {
+  const numberIsRed = counter.value() >= 5;
+  const border = danger ? "border-danger" : "border-success";
 
   return (
-    <div className={`border ${borde} d-flex flex-column align-items-center`}>
+    <div className={`border ${border} d-flex flex-column align-items-center`}>
       <h1>Contador</h1>
-      <h2 className={numeroRojo ? "text-danger" : ""}>{counter.valor()}</h2>
-      <HooplaButton onClick={sumar}>Contar</HooplaButton>
-      <HooplaButton onClick={resetear}>Reiniciar</HooplaButton>
+      <h2 className={numberIsRed ? "text-danger" : ""}>{counter.value()}</h2>
+      <HooplaButton onClick={onIncrease}>Count</HooplaButton>
+      <HooplaButton onClick={onReset}>Restart</HooplaButton>
     </div>
   );
 };
 
 // Elegir si exportar la implementacion en hooks o la de clase
-export default CounterClass;
-// export default CounterHook;
+// export default CounterClass;
+export default CounterHook;

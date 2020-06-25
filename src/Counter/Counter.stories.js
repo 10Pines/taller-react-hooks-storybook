@@ -2,9 +2,9 @@ import React from "react";
 import Counter from "./Counter";
 
 export default {
-  title: "Nuestro Contador",
+  title: "Our counter",
   component: Counter,
 };
 
-export const EscenarioStandard = () => <Counter />;
-export const EscenarioPeligro = () => <Counter peligro={true} />;
+export const Standard = () => <Counter />;
+export const Danger = () => <Counter danger={true} />;
